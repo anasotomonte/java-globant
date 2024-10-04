@@ -1,13 +1,13 @@
 /*Pide al usuario que ingrese dos números, y:
 
 A. Compara si el primer  número  ingresado  es mayor al segundo número  ingresado. 
-67clB. Verifica si el primer número ingresado  es distinto al segundo número ingresado . Muestra el resultado en consola.
+67cl678B. Verifica si el primer número ingresado  es distinto al segundo número ingresado . Muestra el resultado en consola.
 C. Verifica si el primer número ingresado  es divisible por 2 . Muestra el resultado en consola.
 💡Los operadores de comparación más utilizados en Java son: igualdad (==), distinto que (!=), mayor que (>), 
 menor que (<), mayor o igual que (>=), menor o igual que (<=). */
 
 import java.util.Scanner;
-public class app5 {
+public class NumbersVs {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese el primer número:");

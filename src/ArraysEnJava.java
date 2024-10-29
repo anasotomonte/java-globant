@@ -1,4 +1,22 @@
 
+//Arrays
+/* 
+import java.util.Arrays;
+public class ArraysEnJava {
+public static void main(String[] args) {
+int[] original = {1,2,3};
+System.out.println(original .length); //Imprime 3
+original = Arrays.copyOf(original , 10);
+System.out.println(original .length); //Imprime 10
+}
+}
+*/
+
+
+
+//Bucles
+
+
 
 /* 
 public static void main(String[] args) {

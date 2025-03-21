@@ -1,6 +1,7 @@
 package com.egg.catalogo.servicios;
 
 import com.egg.catalogo.entidades.Fabrica;
+import com.egg.catalogo.excepciones.MiException;
 import com.egg.catalogo.repositorios.FabricaRepositorio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class FabricaServicio {
     public void crearFabrica(String nombre) throws MiException {
         validar(nombre);
         Fabrica fabrica = new Fabrica();
-        fabrica.setNombre(nombre);
+        fabrica.setNombreFabrica(nombre);
 
         fabricaRepositorio.save(fabrica);
+    }
+
+    private void validar(String nombre) {
     }
 
     @Transactional(readOnly = true)
@@ -38,7 +42,7 @@ public class FabricaServicio {
 
 
     @Transactional
-    public void modificarFabrica(String nombre, UUID id) throws MiException{
+    public void modificarFabrica(String nombre, UUID id) throws MiException {
         validar(nombre);
         Optional<Fabrica> respuesta = fabricaRepositorio.findById();
 
@@ -48,22 +52,30 @@ public class FabricaServicio {
             fabricaRepositorio.save(fabrica);
 
         } else {
-            throw new MiException(:"No se encontró una fabrica con ese ID");
+            throw new MiException(msg:"No se encontró una fabrica con ese ID");
         }
 
         @Transactional
-                public void eliminar (Long id) throws MiException {
+        public void eliminar (Long id) throws MiException {
             Optional<Fabrica> fabricaOptional = fabricaRepositorio.findById(id);
             if (fabricaOptional.isPresent()) fabricaRepositorio.delete(fabricaOptional.get());
-        }else {
-                throw new MiException("La fabrica con ese ID no existe")
+        }else{
+            throw new MiException(msg:"La fabrica con ese ID no existe")
+        }
+
+        @Transactional(readOnly = true)
+        public Fabrica getOne (UUID id){
+            return fabricaRepositorio.findById(id).orElse(other:null);
+
+            private void validar (String nombre) throws MiException {
+                if (nombre == null || nombre.trim().isEmpty()) {
+                    throw new MiException(msg:"El nombre no puede er nulo o esar vacio")
+                }
             }
         }
 
     }
-
-
-    }
+}
 
 
 

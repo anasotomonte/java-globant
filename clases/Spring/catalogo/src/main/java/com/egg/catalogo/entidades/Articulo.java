@@ -1,20 +1,16 @@
 package com.egg.catalogo.entidades;
 
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "articulos")
-
 public class Articulo {
 
     private static final AtomicInteger atomicInteger = new AtomicInteger(1);
@@ -25,7 +21,7 @@ public class Articulo {
     private Long idArticulo;
 
     @Column(name = "nro_articulo", unique = true, nullable = false)
-    private Integer nroArticulo=atomicInteger.incrementAndGet();
+    private Integer nroArticulo;
 
     @Column(name = "nombre_articulo", length = 100, nullable = false)
     private String nombreArticulo;
@@ -34,10 +30,11 @@ public class Articulo {
     private String descripcionArticulo;
 
     @ManyToOne
-    @JoinColumn(name = "id_fabrica")
+    @JoinColumn(name = "id_fabrica", nullable = false)
     private Fabrica fabrica;
 
-
-
-
+    @PrePersist
+    private void generateNroArticulo() {
+        this.nroArticulo = atomicInteger.getAndIncrement();
+    }
 }

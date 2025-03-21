@@ -2,8 +2,8 @@ package com.egg.catalogo.repositorios;
 
 import com.egg.catalogo.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
-import java.util.UUID;
-
-public interface UsuarioRepositorio extends JpaRepository<Usuario, UUID> {
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
+    Optional<Usuario> findByEmail(String email);
 }
